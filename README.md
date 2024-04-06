@@ -1,14 +1,19 @@
-Mountain Car Problem
-Overview
-The Mountain Car problem is a classic reinforcement learning problem where an underpowered car must find a way to reach the top of a steep hill. The car is situated in a valley and must leverage potential energy by driving up the opposite hill before it can reach the goal on the rightmost hill. This problem exemplifies the challenges of decision-making under uncertainty and learning from interaction with an environment.
+# Mountain Car Problem
 
-Problem Statement
-In the Mountain Car problem, the objective is to control an underpowered car to reach the top of a hill. The car's engine is not strong enough to climb the hill directly, even at full throttle. Therefore, the car must learn to leverage gravity by building up enough momentum from the opposite hill. The environment provides a reward signal that encourages the car to reach the goal with as few steps as possible.
+## Overview
 
-Solution Approach
-Our solution employs a reinforcement learning technique known as Q-learning, where an agent learns a policy to maximize the total reward over time. The agent learns to take actions (accelerate left, do nothing, accelerate right) based on its current state (position and velocity) to maximize future rewards. The learning process involves updating a Q-table, which estimates the optimal action-value function, representing the expected utility of taking a given action in a given state.
+The Mountain Car problem is a classic reinforcement learning challenge that involves an underpowered car needing to reach the top of a steep hill. The vehicle is located in a valley and must utilize potential energy from the opposite hill to gain enough momentum to reach the goal. This problem exemplifies decision-making under uncertainty and learning through environmental interaction.
 
-Key Parameters
-Alpha (Learning Rate): Determines the rate at which new information overrides old information.
-Gamma (Discount Factor): Balances immediate and future rewards.
-Epsilon (Exploration Rate): Determines the trade-off between exploration and exploitation.
+## Problem Statement
+
+The goal in the Mountain Car problem is to maneuver an underpowered car to the peak of a hill. Direct ascent is impossible due to the car's limited power, necessitating a strategy that involves leveraging gravity by accumulating momentum from the opposing hill. The environment rewards the agent for reaching the target with the fewest steps possible.
+
+## Solution Approach
+
+Our approach uses Q-learning, a reinforcement learning algorithm where an agent learns a policy to maximize cumulative rewards. The agent decides among three actions (accelerate left, idle, accelerate right) based on its current state (position and velocity), aiming to maximize future rewards. This involves updating a Q-table, which estimates the utility of actions in given states.
+
+### Key Parameters
+
+- **Alpha (Learning Rate):** Controls how new information affects existing knowledge.
+- **Gamma (Discount Factor):** Weighs immediate versus future rewards.
+- **Epsilon (Exploration Rate):** Balances between exploring new actions and exploiting known ones.
