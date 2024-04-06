@@ -1,6 +1,4 @@
-
-
-#Mountain Car Problem
+Mountain Car Problem
 Overview
 The Mountain Car problem is a classic reinforcement learning problem where an underpowered car must find a way to reach the top of a steep hill. The car is situated in a valley and must leverage potential energy by driving up the opposite hill before it can reach the goal on the rightmost hill. This problem exemplifies the challenges of decision-making under uncertainty and learning from interaction with an environment.
 
