@@ -1,7 +1,6 @@
 
-Creating a README for the Mountain Car problem involves summarizing the problem statement, describing the solution approach (in your case, likely a machine learning or specifically reinforcement learning approach), detailing how to run the program, and optionally providing insights or results from the implementation. Below is a template you can use and adapt based on your specific project details:
 
-Mountain Car Problem
+#Mountain Car Problem
 Overview
 The Mountain Car problem is a classic reinforcement learning problem where an underpowered car must find a way to reach the top of a steep hill. The car is situated in a valley and must leverage potential energy by driving up the opposite hill before it can reach the goal on the rightmost hill. This problem exemplifies the challenges of decision-making under uncertainty and learning from interaction with an environment.
 
