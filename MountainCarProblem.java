@@ -1,6 +1,7 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -123,53 +124,40 @@ public class MountainCarProblem {
        initQtable();
        int steps;
 
-       for (int iter = 0; iter < numIter; iter++) { //loop for each episode
-           State s = new State(0,0,0);
-           // double[] qActions = s.getQS(s);
-           // reset velocity and position for each iteration
-           position = -0.5; //inital state //reset for every iteration
-           velocity = 0.0; //inital state
-           steps = 0;
-           while (!s.isTerminal(position, maxPosition)) {  //loop for each step of episode
-              
-               steps++; //increment step
-               int currentState = discretizedPosition(position) * numStates + discretizedVelocity(velocity);
-               int actionIndex = getEpsilonGreedy(currentState, epsilon); //get epsilon greedy
-               calculate(actionIndex); //take action A observer R and S aka our position and velocity
-               int newState = discretizedPosition(position) * numStates + discretizedVelocity(velocity);
-               // reward = 0;
-               if (s.isTerminal(position, maxPosition)) { //if terminal state reached
-                   //if no more steps to take add it to steps
-                   successes++; 
-                   stepsToGoal.add(steps); //add the amount of steps to list
-                  // break; //break termination condition reached for that run
-               } else {
-                   //For every time step:
-                   //enforce a negative reward for more steps taken
-                   reward = -1;
-               }
-
-               
-               double[] qValues = q.get(newState);
-               double maxQ = qValues[0]; // Initialize maxQ with the first element
-               for (int i = 1; i < qValues.length; i++) { //get maxQ
-                   if (qValues[i] > maxQ) {
-                       maxQ = qValues[i]; // Update maxQ if a larger value is found
-                   }
-               }
-               //chose A' as a function of qˆ(S0,·,w) (e.g., "-greedy)
-               //w <- w + a[rR + gamma*maxQ]
-               //q.get(currentState)[actionIndex] += alpha * (reward + gamma * maxQ - q.get(currentState)[actionIndex]);
-               q.get(currentState)[actionIndex] = (1-alpha) * q.get(currentState)[actionIndex] + alpha * (reward + gamma * maxQ);
-               
-               
-               //s = s'
-               //a = a'
-               //System.out.println(position);
-               alpha *= decay;
-               epsilon *= decay;
-           }
-       }
+       for (int iter = 0; iter < numIter; iter++) {
+        position = -0.6 + random.nextDouble() * 0.2;
+        velocity = 0.0;
+        steps = 0;
+    
+            while (position < maxPosition && steps < 10000) {
+                steps++;
+        
+                int currentState = discretizedPosition(position) * numStates + discretizedVelocity(velocity);
+                int actionIndex = getEpsilonGreedy(currentState, epsilon);
+        
+        // Take action
+                velocity += Action[actionIndex] * 0.001 + Math.cos(3 * position) * (-0.0025);
+                velocity = Math.max(minVelocity, Math.min(maxVelocity, velocity));
+                position += velocity;
+                position = Math.max(minPosition, Math.min(maxPosition, position));
+        
+                if (position <= minPosition && velocity < 0) velocity = 0;
+        
+                int newState = discretizedPosition(position) * numStates + discretizedVelocity(velocity);
+                int reward = (position >= maxPosition) ? 0 : -1;
+        
+        // Q-learning update
+                double maxQ = Arrays.stream(q.get(newState)).max().getAsDouble();
+                q.get(currentState)[actionIndex] += alpha * (reward + gamma * maxQ - q.get(currentState)[actionIndex]);
+    }
+    
+    // Decay per episode
+    epsilon = Math.max(0.01, epsilon * decay);
+    
+    if (position >= maxPosition) {
+        stepsToGoal.add(steps);
+        }
+    }
 
        totalAttempts = numIter; //kinda useless.
    }

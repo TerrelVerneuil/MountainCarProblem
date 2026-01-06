@@ -1,0 +1,27 @@
+{
+  "name": "mountaincarproblem",
+  "version": "1.0.0",
+  "description": "The Mountain Car problem is a classic reinforcement learning challenge that involves an underpowered car needing to reach the top of a steep hill. The vehicle is located in a valley and must utilize potential energy from the opposite hill to gain enough momentum to reach the goal. This problem exemplifies decision-making under uncertainty and learning through environmental interaction.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TerrelVerneuil/MountainCarProblem.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TerrelVerneuil/MountainCarProblem/issues"
+  },
+  "homepage": "https://github.com/TerrelVerneuil/MountainCarProblem#readme",
+  "dependencies": {
+    "gsap": "^3.14.2",
+    "lil-gui": "^0.21.0",
+    "three": "^0.182.0",
+    "vite": "^7.3.0"
+  }
+}
